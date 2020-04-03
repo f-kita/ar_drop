@@ -40,7 +40,7 @@ export const Drop = {
     utils.loadOpenCv(()=> {});
     async function load_check(){
       await new Promise(resolve =>{
-        while(typeof window.cv == 'undefined'){}
+        while(typeof window.cv.Mat == 'undefined'){}
         resolve();
       });
     }
@@ -81,12 +81,9 @@ export const Drop = {
           this.sharedState.msg_box_set_loading(false);
 //        });
         
-console.log('1');
         this.get_img_check().then(()=>{
-console.log('2');
          this.sharedState.msg_box_set_loading(true);
          load_check().then(()=>{
-console.log('3');
           draw = new drop_three(this.ct,this.$refs.get_img_canvas, this.param['f']/10);
           draw.start('container', 'video');
           for (let i = 0; i < this.ct; ++i) {
@@ -98,10 +95,16 @@ console.log('3');
           console.log(this.cam_button);
           this.cam_button.length = 0;
           this.add_button('前カメラ',()=>{
+            if(this.$refs.video.isfront == 1){
+              this.$refs.canvas.style.transform='scale(1, 1)';
+            }
             camera.get_front(this.$refs.video,this.callback_play,err_cb);
             this.$refs.video.isfront=1;
           });
           this.add_button('後カメラ',()=>{
+            if(this.$refs.video.isfront == 1){
+              this.$refs.canvas.style.transform='scale(1, 1)';
+            }
             camera.get_back(this.$refs.video,this.callback_play,err_cb);
             this.$refs.video.isfront=0;
           });
@@ -204,10 +207,7 @@ console.log('3');
                 ctx_out.drawImage(canvas,50, 50, 128, 128,0,0,128,128);
               }
               this.ok_get_img = true;
-              if(video.isfront == 1){
-                canvas.style.transform='scale(1, 1)';
-              }
-console.log('0');
+              
               return;
             }
           }
