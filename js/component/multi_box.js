@@ -19,9 +19,13 @@ export default {
   
   mounted: function () {
     this.providedData.msg_box_set = this.set;
+    this.providedData.msg_box_set_loading = this.set_loading;
     //console.log(this.providedState.msg);
   },
   methods: {
+    set_loading:function(is_loading){
+      this.is_loading=is_loading;
+    },
     set:function(msg,callback_a,callback_b,btn_a,btn_b,last,end_text){
       this.view = true;
       const ct = (last == undefined) ? this.msg.length : this.msg.length -1
@@ -33,7 +37,7 @@ export default {
       this.$set(this.btn_b, ct, btn_b || "次へ＞");
 
       if(end_text){
-        this.is_loading=false;
+        //this.is_loading=false;
         this.$set(this.type, 0, 1);
         this.$set(this.msg, 0, end_text);
         this.$set(this.btn_a, 0, "飛ばす");

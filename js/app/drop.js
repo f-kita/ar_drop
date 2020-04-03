@@ -10,7 +10,6 @@ var draw;
 var is_load = false;
 export const Drop = {
   data:function(){return {
-    loading:true,
     cam_button:[],
     get_img_start:false,
     is_get_img:false,
@@ -65,6 +64,7 @@ export const Drop = {
             this.$refs.video.play();
           }else{
             this.set_msg_box("カメラが検出できませんでした。<br>別のカメラ、又は別のブラウザでお試しください。");
+            this.sharedState.msg_box_set_loading(false);
           }
         };
 //        Tfjs.facemesh.load({maxFaces:1}).then(model => {
@@ -77,14 +77,13 @@ export const Drop = {
             camera.get_back(this.$refs.video,this.callback_get_img_model,err_cb);
             this.$refs.video.isfront=0;
           });
-          this.loading=false;
           this.set_msg_box("だるまの顔を撮ります。<br><br>※前カメラ推奨<br><br>顔に赤枠が出たら画面をタップ。");
+          this.sharedState.msg_box_set_loading(false);
 //        });
         
         this.get_img_check().then(()=>{
-          this.loading=true;
+         this.sharedState.msg_box_set_loading(true);
          load_check().then(()=>{
-          this.loading=false;
           draw = new drop_three(this.ct,this.$refs.get_img_canvas, this.param['f']/10);
           draw.start('container', 'video');
           for (let i = 0; i < this.ct; ++i) {
@@ -104,8 +103,8 @@ export const Drop = {
             this.$refs.video.isfront=0;
           });
           console.log(this.cam_button);
-          this.loading=false;
           this.set_msg_box("指でだるまの体を落してください。<br>※後カメラ推奨<br><br>認識すると黄色いブロックが出ます。");
+          this.sharedState.msg_box_set_loading(false);
          });
         });
 //    });
