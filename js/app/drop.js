@@ -81,9 +81,12 @@ export const Drop = {
           this.sharedState.msg_box_set_loading(false);
 //        });
         
+console.log('1');
         this.get_img_check().then(()=>{
+console.log('2');
          this.sharedState.msg_box_set_loading(true);
          load_check().then(()=>{
+console.log('3');
           draw = new drop_three(this.ct,this.$refs.get_img_canvas, this.param['f']/10);
           draw.start('container', 'video');
           for (let i = 0; i < this.ct; ++i) {
@@ -151,7 +154,7 @@ export const Drop = {
       if(video.isfront == 1){
         canvas.style.transform='scale(-1, 1)';
       }
-      this.get_img_start=true;
+      
 
       var rect = {x:0, y:0, width:0, height:0};
       var tracker = new tracking.ObjectTracker('face');
@@ -170,6 +173,7 @@ export const Drop = {
         
         try {
           if(video.videoWidth > 0){
+            this.get_img_start=true;
             ctx_in.drawImage(video,0,0,video.width,video.height);
             trackerTask=tracking.track("#canvas", tracker);
 
@@ -200,6 +204,10 @@ export const Drop = {
                 ctx_out.drawImage(canvas,50, 50, 128, 128,0,0,128,128);
               }
               this.ok_get_img = true;
+              if(video.isfront == 1){
+                canvas.style.transform='scale(1, 1)';
+              }
+console.log('0');
               return;
             }
           }
