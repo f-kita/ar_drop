@@ -40,8 +40,8 @@ export const Drop = {
     utils.loadOpenCv(()=> {});
     async function load_check(){
       await new Promise(resolve =>{
-        while(typeof window.cv == 'undefined'){}
-        while(typeof window.cv.Mat == 'undefined'){}
+        while(typeof cv === 'undefined'){}
+        while(typeof cv.Mat === 'undefined'){}
         resolve();
       });
     }
