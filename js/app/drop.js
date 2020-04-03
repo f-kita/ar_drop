@@ -37,7 +37,9 @@ export const Drop = {
 //alert(this.device);
 
     let utils = new Utils('top');
-    utils.loadOpenCv(()=> {is_load=true;});
+    utils.loadOpenCv(()=> {is_load=true;
+      console.log('10');
+    });
     async function load_check(){
       await new Promise(resolve =>{
         while(!is_load){}
