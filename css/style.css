@@ -68,10 +68,10 @@ width: 94%;
 }
 
 .bg-filter-loading {
- background-image: url(/ar_drop/img/loading.svg);
+ background-image: url(../img/loading.svg);
 }
 
 .bg-filter-rec {
- background-image: url(/ar_drop/img/bars.svg);
+ background-image: url(../img/bars.svg);
 }
 

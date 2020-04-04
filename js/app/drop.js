@@ -6,8 +6,6 @@ import drop_three from './drop_three.js';
 import MyVideo from '../component/video.js';
 
 var draw;
-//var face_model;
-var is_load = false;
 export const Drop = {
   data:function(){return {
     cam_button:[],
@@ -16,6 +14,7 @@ export const Drop = {
     ok_get_img:false,
     sharedState: {
       msg_box_set:null,
+      msg_box_set_loading:null,
     },
     ct:2,
   }},

@@ -1,4 +1,4 @@
-var CACHE_NAME = 'ar-drop';
+var CACHE_NAME = 'ar-drop-1';
 var urlsToCache = [
     'index.html',
     'manifest.json',
