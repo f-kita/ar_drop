@@ -11,11 +11,14 @@
 
 <link rel="icon" href="img/favicon.ico">
 <link rel="stylesheet" href="css/style.css">
+<script src="js/vue.min.js"></script>
 <script src="js/component/helper.js"></script>
 <script src="js/opencv/utils.js"></script>
-<script src="js/oimo.min.js"></script>
 <script src="js/tracking-min.js"></script>
 <script src="js/data/face-min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/oimo.min.js"></script>
+
 </head>
 <body>
   <div id="header">
@@ -27,19 +30,6 @@
   <div id="footer">
   </div>
 </body>
-<script>
-<!-- app -->
-  const ENV_LOCAL=false;
-  // 環境でjs切り替え
-  const URL_VUE = (ENV_LOCAL) ? "js/vue.min.js"
-                              : "js/vue.min.js";//"https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.min.js";
-  
-  let error_cb=(url)=>{console.log("Failed to load "+url)};
-  
-  Helper.load_js_async(URL_VUE,()=>{},error_cb).then(()=>{
-    Helper.load_js('js/app.js',()=>{},error_cb,'module');
-  });
-</script>
 <script>
   //<!-- pwa service worker -->
   if ('serviceWorker' in navigator) {
