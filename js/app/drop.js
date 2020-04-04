@@ -136,7 +136,7 @@ export const Drop = {
       if(this.cam_button.length == 1){
         this.cam_button.push(this.cam_button[0]);
       }
-      this.sharedState.msg_box_set(msg,this.cam_button[0].cb,this.cam_button[1].cb,this.cam_button[0].title,this.cam_button[1].title,true,"読み込みが完了しました。");
+      this.sharedState.msg_box_set(msg,this.cam_button[0].cb,this.cam_button[1].cb,this.cam_button[0].title,this.cam_button[1].title,true,"説明をみる　次へ＞");
     },
     get_img: function(){
       if(this.get_img_start){
