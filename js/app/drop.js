@@ -117,7 +117,7 @@ export const Drop = {
           });
           console.log(this.cam_button);
           this.set_msg_box("指でだるまの体を落してください。<br>※後カメラ推奨<br><br>認識すると黄色いブロックが出ます。");
-//          this.sharedState.msg_box_set_loading(false);
+          this.sharedState.msg_box_set_loading(false);
          });
         });
 //    });
@@ -139,6 +139,7 @@ export const Drop = {
       this.sharedState.msg_box_set(msg,this.cam_button[0].cb,this.cam_button[1].cb,this.cam_button[0].title,this.cam_button[1].title,true,"読み込みが完了しました。");
     },
     get_img: function(){
+      this.sharedState.msg_box_set_loading(true);
       if(this.get_img_start)this.is_get_img = true;
     },
     get_img_check:function (){
@@ -183,7 +184,6 @@ export const Drop = {
         
         try {
           if(video.videoWidth > 0){
-            this.get_img_start=true;
             ctx_in.drawImage(video,0,0,video.width,video.height);
             trackerTask=tracking.track("#canvas", tracker);
 
