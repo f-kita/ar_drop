@@ -25,6 +25,7 @@ export default {
   methods: {
     set_loading:function(is_loading){
       this.is_loading=is_loading;
+      if(is_loading)this.view = true;
       console.log('set_loading'+is_loading);
     },
     set:function(msg,callback_a,callback_b,btn_a,btn_b,last,end_text){

@@ -184,6 +184,7 @@ export const Drop = {
         
         try {
           if(video.videoWidth > 0){
+            this.get_img_start=true;
             ctx_in.drawImage(video,0,0,video.width,video.height);
             trackerTask=tracking.track("#canvas", tracker);
 
@@ -196,7 +197,6 @@ export const Drop = {
             }
             
             if(this.is_get_img){
-              this.sharedState.msg_box_set_loading(true);
              // trackerTask.stop();
             //  console.log(rect);
               const ctx_out=this.$refs.get_img_canvas.getContext("2d");
