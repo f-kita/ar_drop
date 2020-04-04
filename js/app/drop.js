@@ -42,9 +42,7 @@ export const Drop = {
       await new Promise(resolve =>{
         console.log(1);
         while(typeof cv === 'undefined'){}
-console.log(2);
-        while(typeof cv.Mat === 'undefined'){}
-        console.log(3);
+console.log(cv);
         resolve();
       });
     }
