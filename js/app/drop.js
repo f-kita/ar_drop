@@ -44,7 +44,7 @@ export const Drop = {
           && typeof cv.Mat !== 'undefined'){
             resolve('ok');
           }else{
-            setTimeout(func, 1000);
+            setTimeout(func, 300);
           }
         }
         func();
@@ -146,7 +146,7 @@ export const Drop = {
           if(this.ok_get_img){
             resolve('ok');
           }else{
-            setTimeout(func, 1000);
+            setTimeout(func, 500);
           }
         }
         func();
@@ -217,13 +217,13 @@ export const Drop = {
               return;
             }
           }
-          setTimeout(processVideo, 1000/10);
+          setTimeout(processVideo, 1000/5);
         } catch (err) {
           console.error(err);
         }
       };
       
-      setTimeout(processVideo, 1000/10);
+      setTimeout(processVideo, 1000/5);
       //////////////////////////////////////////////////
       //////////////////////////////////////////////////
     },
