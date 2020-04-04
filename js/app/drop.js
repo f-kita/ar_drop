@@ -29,7 +29,8 @@ export const Drop = {
   },
   mounted: function () {
     this.sharedState.msg_box_set("『ARだるまおとし』<br><br><img src='img/draw.png'>矢印の所を落します。<br><br>読み込み中です。");
-    this.sharedState.msg_box_set("対応ブラウザ<br>・Android Chrome<br>・iPhone Safari<br><br>使用機能<br>・カメラ機能<br>・傾きセンサー(あれば)<br>　※Safariは設定から許可する必要あり");
+//  this.sharedState.msg_box_set("対応ブラウザ<br>・Android Chrome<br>・iPhone Safari<br><br>使用機能<br>・カメラ機能<br>・傾きセンサー(あれば)<br>　※Safariは設定から許可する必要あり");
+    this.sharedState.msg_box_set("対応ブラウザ<br>・Android Chrome<br>・iPhone Safari<br><br>使用機能<br>・カメラ機能<br><br>　※Safariは設定から許可する必要あるかも");
     this.sharedState.msg_box_set("読み込み中です。<br><br>しばらくお待ちください。<br>");
     console.log(this.device);
     console.log(this.param['f']);
