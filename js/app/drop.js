@@ -88,7 +88,7 @@ export const Drop = {
 //        });
         
         this.get_img_check().then(()=>{
-         this.sharedState.msg_box_set_loading(true);
+         
          load_check().then(()=>{
           draw = new drop_three(this.ct,this.$refs.get_img_canvas, this.param['f']/10);
           draw.start('container', 'video');
@@ -195,6 +195,7 @@ export const Drop = {
             }
             
             if(this.is_get_img){
+              this.sharedState.msg_box_set_loading(true);
              // trackerTask.stop();
             //  console.log(rect);
               const ctx_out=this.$refs.get_img_canvas.getContext("2d");
@@ -230,7 +231,8 @@ export const Drop = {
     callback_play: function (e) {
       console.log('callback_play @@@@@@@@@@@@@@@@@@');
 
-      draw.set_control_ori();
+      //ジャイロ対応
+      //draw.set_control_ori();
       const video = e.target;
       video.style.display="none";
       const canvas = this.$refs.canvas;
