@@ -6,6 +6,7 @@ export default {
   name:'MultiBox',
   data:function(){return {
     view:false,
+    view_load:true,
     is_loading:true,
     msg:[],
     page:0,
@@ -25,7 +26,8 @@ export default {
   methods: {
     set_loading:function(is_loading){
       this.is_loading=is_loading;
-      if(is_loading)this.view = true;
+      if(is_loading)this.view_load = true;
+      else this.view_load = false;
       console.log('set_loading'+is_loading);
     },
     set:function(msg,callback_a,callback_b,btn_a,btn_b,last,end_text){
@@ -58,7 +60,7 @@ export default {
   },
   template: `
   <div>
-    <div v-show="view" class="bg-filter" v-bind:class="{ 'bg-filter-loading': is_loading }"></div>
+    <div v-show="view_load" class="bg-filter" v-bind:class="{ 'bg-filter-loading': is_loading }"></div>
     <div id="msg_box" v-show="view" style="z-index: 99999;position: fixed; top: 50%;left: 50%;transform: translate(-50%, -50%);">
       <div style="color:#ffffff;"><span v-html="msg[page]"></span></div>
       <button style="" :disabled="type[page]==0&&page==0" ${pointer_event}="btn_a_down">{{ btn_a[page] }}</button><button style="" :disabled="type[page]==0&&page==(msg.length-1)" ${pointer_event}="btn_b_down">{{ btn_b[page] }}</button>
