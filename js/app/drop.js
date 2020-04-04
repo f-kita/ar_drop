@@ -38,12 +38,18 @@ export const Drop = {
 
     let utils = new Utils('top');
     utils.loadOpenCv(()=> {});
-    async function load_check(){
-      await new Promise(resolve =>{
-        while(typeof cv === 'undefined'){}
-        while(typeof cv.Mat === 'undefined'){}
-        resolve();
-      });
+    function load_check(){
+      return new Promise(resolve => {
+        const func = () => {
+          if(typeof cv !== 'undefined'
+          && typeof cv.Mat !== 'undefined'){
+            resolve('ok');
+          }else{
+            setTimeout(func, 1000);
+          }
+        }
+        func();
+      })
     }
     
     
