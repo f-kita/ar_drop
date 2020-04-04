@@ -13,6 +13,7 @@ function Utils(errorOutputId) { // eslint-disable-line no-unused-vars
             if (cv.getBuildInformation)
             {
                 console.log(cv.getBuildInformation());
+                console.log('cv normal');
                 //alert(cv.getBuildInformation());
                 onloadCallback();
             }
