@@ -36,6 +36,17 @@ export const Drop = {
     console.log(this.param['f']);
 //alert(this.device);
 
+if ('serviceWorker' in navigator) {
+  
+  navigator.serviceWorker.register('sw.js').then(function(registration) {
+    if (typeof registration.update == 'function') {
+      registration.update();
+    }
+    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+  }).catch(function(err) {
+    console.log('ServiceWorker registration failed: ', err);
+  });
+}
     let utils = new Utils('top');
     utils.loadOpenCv(()=> {});
     function load_check(){
