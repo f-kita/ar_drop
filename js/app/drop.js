@@ -139,8 +139,10 @@ export const Drop = {
       this.sharedState.msg_box_set(msg,this.cam_button[0].cb,this.cam_button[1].cb,this.cam_button[0].title,this.cam_button[1].title,true,"読み込みが完了しました。");
     },
     get_img: function(){
-      this.sharedState.msg_box_set_loading(true);
-      if(this.get_img_start)this.is_get_img = true;
+      if(this.get_img_start){
+        this.is_get_img = true;
+        this.sharedState.msg_box_set_loading(true);
+      }
     },
     get_img_check:function (){
       return new Promise(resolve => {
