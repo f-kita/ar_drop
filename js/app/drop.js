@@ -117,7 +117,7 @@ export const Drop = {
           });
           console.log(this.cam_button);
           this.set_msg_box("指でだるまの体を落してください。<br>※後カメラ推奨<br><br>認識すると黄色いブロックが出ます。");
-          this.sharedState.msg_box_set_loading(false);
+//          this.sharedState.msg_box_set_loading(false);
          });
         });
 //    });
