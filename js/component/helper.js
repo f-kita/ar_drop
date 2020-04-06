@@ -26,4 +26,16 @@ class Helper {
     });
   }
   
+  static check_progress(func_check,timeout=300){
+    return new Promise(resolve => {
+      const func = () => {
+        if(func_check()){
+          resolve('ok');
+        }else{
+          setTimeout(func, timeout);
+        }
+      }
+      func();
+    })
+  }
 }

@@ -1,7 +1,5 @@
 "use strict";
-//import MsgBox from '../component/msg_box.js';
 import MultiBox from '../component/multi_box.js';
-
 import drop_three from './drop_three.js';
 import MyVideo from '../component/video.js';
 
@@ -30,26 +28,16 @@ export const Drop = {
   mounted: function () {
     this.sharedState.msg_box_set("『ARだるまおとし』<br><br><img src='img/draw.png'>矢印の所を落します。<br><br>読み込み中です。");
 //  this.sharedState.msg_box_set("対応ブラウザ<br>・Android Chrome<br>・iPhone Safari<br><br>使用機能<br>・カメラ機能<br>・傾きセンサー(あれば)<br>　※Safariは設定から許可する必要あり");
-    this.sharedState.msg_box_set("対応ブラウザ<br>・Android Chrome<br>・iPhone Safari<br><br>使用機能<br>・カメラ機能<br><br>　※Safariは設定から許可する必要あるかも");
+    this.sharedState.msg_box_set("対応ブラウザ<br>・Android Chrome<br>・iPhone Safari<br><br>使用機能<br>・カメラ機能<br>");
     this.sharedState.msg_box_set("読み込み中です。<br><br>しばらくお待ちください。<br>");
-    console.log(this.device);
-    console.log(this.param['f']);
+    //console.log(this.device);
+    //console.log(this.param['f']);
 //alert(this.device);
 
-if ('serviceWorker' in navigator) {
-  
-  navigator.serviceWorker.register('sw.js').then(function(registration) {
-    if (typeof registration.update == 'function') {
-      registration.update();
-    }
-    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-  }).catch(function(err) {
-    console.log('ServiceWorker registration failed: ', err);
-  });
-}
+
     let utils = new Utils('top');
     utils.loadOpenCv(()=> {});
-    function load_check(){
+/*    function load_check(){
       return new Promise(resolve => {
         const func = () => {
           if(typeof cv !== 'undefined'
@@ -62,7 +50,7 @@ if ('serviceWorker' in navigator) {
         func();
       })
     }
-    
+*/
     
 //    utils.loadOpenCv(()=> {
         const camera = new MyVideo(this.device);
@@ -85,6 +73,7 @@ if ('serviceWorker' in navigator) {
             this.sharedState.msg_box_set_loading(false);
           }
         };
+        //Helper.check_progress(()=>true).then(()=>{
 //        Tfjs.facemesh.load({maxFaces:1}).then(model => {
 //          face_model = model;
           this.add_button('前カメラ',()=>{
@@ -99,9 +88,9 @@ if ('serviceWorker' in navigator) {
           this.sharedState.msg_box_set_loading(false);
 //        });
         
-        this.get_img_check().then(()=>{
+        Helper.check_progress(()=>this.ok_get_img).then(()=>{
          
-         load_check().then(()=>{
+          Helper.check_progress(()=>(typeof cv !== 'undefined'&& typeof cv.Mat !== 'undefined')).then(()=>{
           draw = new drop_three(this.ct,this.$refs.get_img_canvas, this.param['f']/10);
           draw.start('container', 'video');
           for (let i = 0; i < this.ct; ++i) {
@@ -155,6 +144,7 @@ if ('serviceWorker' in navigator) {
         this.sharedState.msg_box_set_loading(true);
       }
     },
+/*
     get_img_check:function (){
       return new Promise(resolve => {
         const func = () => {
@@ -167,6 +157,7 @@ if ('serviceWorker' in navigator) {
         func();
       })
     },
+*/
     callback_get_img_model: function (e) {
       console.log('callback_get_img_model*********** ');
       const video = e.target;
