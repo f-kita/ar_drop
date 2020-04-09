@@ -24,6 +24,10 @@ export default class drop_three extends three_base {
 
     this.ct = ct;
     this.img_canvas = img_canvas;
+    let loader = new THREE.FontLoader();
+    loader.load('js/three/font/helvetiker_bold.typeface.json', (font)=>{
+        this.font = font;
+    });
   }
 
   init(id){
@@ -172,6 +176,8 @@ export default class drop_three extends three_base {
       }else if(this.look_obj.position.y < 2){
         this.y_ct++;
         ok = true;
+
+        
       }
       if(this.y_ct > this.y_ct_max){
         this.y_ct = 0;
@@ -186,6 +192,7 @@ export default class drop_three extends three_base {
           this.list_obj[i].body.resetPosition( this.CENTER_X,this.START_Y+(this.ct-i-1)*this.BOX_SIZE,this.CENTER_Z);
         }
         if(ok){
+          
           this.ct++;
           this.add_box(null,this.ct-1,this.img_canvas);
           alert('成功　'+ this.ct +'段に増やします');
@@ -245,7 +252,25 @@ export default class drop_three extends three_base {
     object.matrix.setPosition({x:new_pos.x,y:new_pos.y,z:new_pos.z});
     object.matrixAutoUpdate = false;
   }
-
+  add_text(str)
+  {
+    var textGeometry = new THREE.TextGeometry( str, {
+      size: 3, height: 4, //curveSegments: 3,
+      font: this.font, weight: "bold", style: "normal",
+      bevelThickness: 1, bevelSize: 2, bevelEnabled: false
+    });
+    var material = new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
+    var text = new THREE.Mesh( textGeometry, material );
+//console.log(this.look_obj.position);
+    
+    //text.setRotationFromMatrix(this.camera.projectionMatrix);
+    //text.lookAt(this.camera.position);
+    text.matrix.setPosition(this.look_obj.position);
+    //
+    text.matrixAutoUpdate = false;
+    this.scene.add( text );
+    return text;
+  }
   add_box(pos,num,image)
   {
     const geometry = new THREE.BoxGeometry( this.BOX_SIZE,  this.BOX_SIZE,  this.BOX_SIZE );
