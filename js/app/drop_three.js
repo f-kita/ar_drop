@@ -13,6 +13,7 @@ export default class drop_three extends three_base {
     this.y_ct_max = 90;
     //this.BALL_SIZE = 1;
     this.BOX_SIZE = 3;
+    this.SAFE = 100;
     
     //this.FRICTION = 0.3;
     this.FRICTION = friction ? friction : 0.3;
@@ -175,21 +176,20 @@ export default class drop_three extends three_base {
   //console.log(this.camera.look_obj);
 //      this.follow(this.camera,this.look_obj);
       let ok = false;
-      if(this.look_obj.position.y < 1){
-        this.y_ct++;
-      }else if(this.look_obj.position.y < 2){
-        this.y_ct++;
+      if((this.look_obj.position.x-this.cube.position.x)**2 < this.SAFE
+      && (this.look_obj.position.z-this.cube.position.z)**2 < this.SAFE){
         
-        if(this.look_obj.position.x < this.cube.position.x+this.BOX_SIZE*2
-        && this.look_obj.position.x > this.cube.position.x-this.BOX_SIZE*2
-        && this.look_obj.position.z < this.cube.position.z+this.BOX_SIZE*2
-        && this.look_obj.position.z > this.cube.position.z-this.BOX_SIZE*2
-        ){
-          ok = true;
-          if(this.y_ct == 1)  this.add_text('3');
-          if(this.y_ct == 30)  this.add_text('2');
-          if(this.y_ct == 60)  this.add_text('1');
+        if(this.look_obj.position.y < 1){
+          this.y_ct++;
+        }else if(this.look_obj.position.y < 2){
+          this.y_ct++;
+            ok = true;
+            if(this.y_ct == 10)  this.add_text('3');
+            if(this.y_ct == 40)  this.add_text('2');
+            if(this.y_ct == 70)  this.add_text('1');   
         }
+      }else{
+        this.y_ct = this.y_ct_max+1;
       }
       if(this.y_ct > this.y_ct_max){
         this.y_ct = 0;

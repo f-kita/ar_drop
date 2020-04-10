@@ -7,7 +7,9 @@ var urlsToCache = [
     'img/favicon.ico',
     'img/icon.png',
     'img/loading.svg',
-    'js/oimo.min.js',
+    'js/vue.min.js',
+    'js/tracking-min.js',
+    'js/data/face-min.js',
     'js/app.js',
     'js/app/drop.js',
     'js/app/drop_three.js',
@@ -17,14 +19,13 @@ var urlsToCache = [
     'js/component/video.js',
     'js/opencv/utils.js',
     'js/opencv/opencv.js',
+    'js/oimo.min.js',
+    'js/three/three.min.js',
+    'js/three/font/helvetiker_bold.typeface.json',
     'js/three/controls/DeviceOrientationControls.js',
     'js/three/controls/OrbitControls.js',
-    'js/three/controls/TrackballControls.js',
-    'js/three/stats.min.js',
-    'js/three/three.min.js',
-    'js/vue.min.js',
-    'js/tracking-min.js',
-    'js/data/face-min.js'
+    'js/three/controls/TrackballControls.js'
+//    'js/three/stats.min.js'
 ];
 
 // インストール処理
