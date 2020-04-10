@@ -179,10 +179,17 @@ export default class drop_three extends three_base {
         this.y_ct++;
       }else if(this.look_obj.position.y < 2){
         this.y_ct++;
-        ok = true;
-        if(this.y_ct == 1)  this.add_text('3');
-        if(this.y_ct == 30)  this.add_text('2');
-        if(this.y_ct == 60)  this.add_text('1');
+        
+        if(this.look_obj.position.x < this.cube.position.x+this.BOX_SIZE*2
+        && this.look_obj.position.x > this.cube.position.x-this.BOX_SIZE*2
+        && this.look_obj.position.z < this.cube.position.z+this.BOX_SIZE*2
+        && this.look_obj.position.z > this.cube.position.z-this.BOX_SIZE*2
+        ){
+          ok = true;
+          if(this.y_ct == 1)  this.add_text('3');
+          if(this.y_ct == 30)  this.add_text('2');
+          if(this.y_ct == 60)  this.add_text('1');
+        }
       }
       if(this.y_ct > this.y_ct_max){
         this.y_ct = 0;
