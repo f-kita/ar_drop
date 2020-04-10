@@ -10,7 +10,7 @@ export default class drop_three extends three_base {
     this.CENTER_Z = 50;
     this.START_Y = 0.0;
     this.y_ct = 0;
-    this.y_ct_max = 100;
+    this.y_ct_max = 90;
     //this.BALL_SIZE = 1;
     this.BOX_SIZE = 3;
     
@@ -24,6 +24,10 @@ export default class drop_three extends three_base {
 
     this.ct = ct;
     this.img_canvas = img_canvas;
+    this.cube = null;
+    // 数字
+    this.text = null;
+    this.font = null;
     let loader = new THREE.FontLoader();
     loader.load('js/three/font/helvetiker_bold.typeface.json', (font)=>{
         this.font = font;
@@ -88,9 +92,9 @@ export default class drop_three extends three_base {
     const geometry = new THREE.BoxGeometry( this.BOX_SIZE,  this.BOX_SIZE,  this.BOX_SIZE );
     let material = new THREE.MeshBasicMaterial( { color: 0x008800, overdraw: 0.5 } );
       //material = new THREE.MeshStandardMaterial({color:0xffffff} );
-    const cube = new THREE.Mesh( geometry, material );
-    cube.position.set( this.CENTER_X, -1.5, this.CENTER_Z );
-    this.scene.add( cube );
+    this.cube = new THREE.Mesh( geometry, material );
+    this.cube.position.set( this.CENTER_X, -1.5, this.CENTER_Z );
+    this.scene.add( this.cube );
 
     this.world.add({size:[this.BOX_SIZE,  this.BOX_SIZE,  this.BOX_SIZE], pos:[this.CENTER_X,-1.5,this.CENTER_Z]});
     this.world.add({size:[size, 2, divisions], pos:[this.CENTER_X,-4,this.CENTER_Z]});
@@ -176,11 +180,14 @@ export default class drop_three extends three_base {
       }else if(this.look_obj.position.y < 2){
         this.y_ct++;
         ok = true;
-
-        
+        if(this.y_ct == 1)  this.add_text('3');
+        if(this.y_ct == 30)  this.add_text('2');
+        if(this.y_ct == 60)  this.add_text('1');
       }
       if(this.y_ct > this.y_ct_max){
         this.y_ct = 0;
+        this.scene.remove(this.text);
+        this.text = null;
         
         //clear contacts
         while(this.world.contacts!==null){
@@ -254,22 +261,29 @@ export default class drop_three extends three_base {
   }
   add_text(str)
   {
-    var textGeometry = new THREE.TextGeometry( str, {
-      size: 3, height: 4, //curveSegments: 3,
-      font: this.font, weight: "bold", style: "normal",
-      bevelThickness: 1, bevelSize: 2, bevelEnabled: false
-    });
-    var material = new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
-    var text = new THREE.Mesh( textGeometry, material );
-//console.log(this.look_obj.position);
+    if(this.font){
+      if(this.text){
+        this.scene.remove(this.text);
+      }
+      var textGeometry = new THREE.TextGeometry( str, {
+        size: 3, height: 4, //curveSegments: 3,
+        font: this.font, weight: "bold", style: "normal",
+        bevelThickness: 1, bevelSize: 2, bevelEnabled: false
+      });
+      var material = new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
+      this.text = new THREE.Mesh( textGeometry, material );
+  //console.log(this.look_obj.position);
+      
+  
+      this.text.matrix.extractRotation(this.camera.matrix);
+      //this.text.setRotationFromMatrix(this.camera.matrixWorldInverse);
+      //this.text.quaternion.copy(this.camera.quaternion);
+      //this.text.lookAt(this.camera.position);
+      this.text.matrix.setPosition({x:this.cube.position.x,y:this.cube.position.y+this.BOX_SIZE,z:this.cube.position.z});
+      this.text.matrixAutoUpdate = false;
+      this.scene.add( this.text );
     
-    //text.setRotationFromMatrix(this.camera.projectionMatrix);
-    //text.lookAt(this.camera.position);
-    text.matrix.setPosition(this.look_obj.position);
-    //
-    text.matrixAutoUpdate = false;
-    this.scene.add( text );
-    return text;
+    }
   }
   add_box(pos,num,image)
   {

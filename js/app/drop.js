@@ -76,9 +76,7 @@ export const Drop = {
         for (let i = 0; i < this.ct; ++i) {
           draw.add_box(null,i,this.$refs.get_img_canvas);
         }
- //       Helper.check_progress(()=>draw.font).then(()=>{
- //       draw.text = draw.add_text('OKKKKKKKKKKKKKKKKKK');
- //       });
+        
         //setTimeout(()=>{draw.add_ball({x:50,y:5,z:46})},3000);
 
         //this.$refs.video.src =false;
