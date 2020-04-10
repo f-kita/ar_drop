@@ -1,5 +1,5 @@
 "use strict";
-class Helper {
+var Helper = class  {
   static load_js(url ,onloadCallback, errorCallback,type) {
     let script = document.createElement('script');
     script.setAttribute('async', '');
